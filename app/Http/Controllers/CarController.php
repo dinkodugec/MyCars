@@ -16,7 +16,9 @@ class CarController extends Controller
     {
        $cars = Car::all();  //all is eloquent function
 
-       dd($cars);
+       return view('car.index')->with([
+        'cars' => $cars
+    ]);
     }
 
     /**
