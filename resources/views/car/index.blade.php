@@ -18,6 +18,9 @@
                 </div>
             </div>
         </div>
+        <div class="mt-4">
+            <a class="btn btn-success btn-sm" href="/car/create"><i class="fas fa-plus-circle"></i> Create new Car</a>
+        </div>
     </div>
 </div>
 @endsection
