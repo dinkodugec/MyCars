@@ -28,15 +28,18 @@
 
                             <div class="form-group">
                                 <label for="name">Manufacturer</label>
-                                <input type="text" class="form-control" id="name" name="manufacturer" value="{{ old('manufacturer') }}">
+                                <input type="text" class="form-control{{ $errors->has('manufacturer') ? ' border-danger' : '' }}" id="name" name="name" value="{{old('manufacturer')}}">
+                                <small class="form-text text-danger">{!! $errors->first('manufacturer') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control{{ $errors->has('name') ? ' border-danger' : '' }}" id="name" name="name" value="{{old('name')}}">
+                                <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea class="form-control" id="description"  value="{{ old('description') }}" name="description" rows="5"></textarea>
+                                <textarea class="form-control{{ $errors->has('description') ? ' border-danger' : '' }}" id="description" name="description" rows="5">{{old('description')}}</textarea>
+                                <small class="form-text text-danger">{!! $errors->first('description') !!}</small>
                             </div>
 
                             <div class="form-group">
