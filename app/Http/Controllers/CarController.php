@@ -39,7 +39,25 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => 'required|min:2',
+            'description' => 'required|min:5',
+            'manufacturer' => 'required|min:2',
+        ]);
+
+        $car = new Car([
+            'manufacturer' => $request['manufacturer'],
+            'name' => $request['name'],
+            'image' => $request['image'],
+            'description' => $request['description'],
+        ]);
+
+       /*  if($request['image']){
+            $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
+         } */
+        $car->save();
+        return $this->index();
     }
 
     /**

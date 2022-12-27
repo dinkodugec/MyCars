@@ -18,7 +18,7 @@ class CreateCarsTable extends Migration
             $table->text('image')->nullable();
             $table->string('manufacturer');
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

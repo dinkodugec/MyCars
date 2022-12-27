@@ -26,3 +26,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('car', CarController::class);
+
+/* Route::get('/car/store', 'CarController@store')->name('car.store'); */
