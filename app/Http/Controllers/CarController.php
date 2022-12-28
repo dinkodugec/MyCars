@@ -57,7 +57,11 @@ class CarController extends Controller
             $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
          } */
         $car->save();
-        return $this->index();
+        return $this->index()->with(
+               [
+                'message_success' => "The Car" . " " . $car->name . " " . "was created."
+               ]
+      );
     }
 
     /**

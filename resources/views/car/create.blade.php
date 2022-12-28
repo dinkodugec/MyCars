@@ -3,6 +3,24 @@
 @section('content')
 
 <main class="py-4">
+
+    @isset($message_success)
+        <div class="container">
+            <div class="alert alert-success" role="alert">
+                {{  $message_success }}
+            </div>
+        </div>
+    @endisset
+
+    @isset($message_warning)
+    <div class="container">
+        <div class="alert alert-warning" role="alert">
+            {{  $message_warning  }}
+        </div>
+    </div>
+@endisset
+
+
     @if($errors->any())
         <div class="container">
             <div class="alert alert-danger" role="alert">
@@ -28,7 +46,7 @@
 
                             <div class="form-group">
                                 <label for="name">Manufacturer</label>
-                                <input type="text" class="form-control{{ $errors->has('manufacturer') ? ' border-danger' : '' }}" id="name" name="name" value="{{old('manufacturer')}}">
+                                <input type="text" class="form-control{{ $errors->has('manufacturer') ? ' border-danger' : '' }}" id="name" name="manufacturer" value="{{old('manufacturer')}}">
                                 <small class="form-text text-danger">{!! $errors->first('manufacturer') !!}</small>
                             </div>
                             <div class="form-group">
