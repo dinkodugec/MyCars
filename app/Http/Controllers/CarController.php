@@ -85,7 +85,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return view('car.edit')->with([
+            'car'=> $car
+        ]);
     }
 
     /**
@@ -95,9 +97,30 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update(Request $request, Car $car)  //Request from the form and instance of car that we WANT DISPLAY
     {
-        //
+        $request->validate([
+            'name' => 'required|min:2',
+            'description' => 'required|min:5',
+            'manufacturer' => 'required|min:2',
+        ]);
+
+        $car->update([
+            'manufacturer' => $request['manufacturer'],
+            'name' => $request['name'],
+            'image' => $request['image'],
+            'description' => $request['description'],
+        ]);
+
+       /*  if($request['image']){
+            $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
+         } */
+        $car->save();
+        return $this->index()->with(
+               [
+                'message_success' => "The Car" . " " . $car->name . " " . "was updated."
+               ]
+      );
     }
 
     /**
