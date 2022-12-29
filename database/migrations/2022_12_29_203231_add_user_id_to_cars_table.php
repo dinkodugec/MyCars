@@ -30,7 +30,7 @@ class AddUserIdToCarsTable extends Migration
      */
     public function down()
     {
-        Schema::table('hobbies', function (Blueprint $table) {
+        Schema::table('cars', function (Blueprint $table) {
             $table->dropForeign(['user_id']); //always use array
             $table->dropColumn('user_id');
         });
