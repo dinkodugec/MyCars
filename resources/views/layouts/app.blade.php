@@ -36,6 +36,7 @@
                         <a class="nav-link{{ Request::is('/') ? ' active' : '' }}" href="/">Start</a>
                         <a class="nav-link{{ Request::is('info') ? ' active' : '' }}" href="/info">Info</a>
                         <a class="nav-link{{ Request::is('car') ? ' active' : '' }}" href="/car">Cars</a>
+                        <a class="nav-link{{ Request::is('tag') ? ' active' : '' }}" href="/tag">Tags</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
