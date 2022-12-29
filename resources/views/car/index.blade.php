@@ -13,6 +13,11 @@
                         <li class="list-group-item">
                           <a title="Show details" href="/car/{{ $car->id }}">  {{ $car->name }}</a>
                           <a class="btn btn-sm btn-light ml-2"  href="/car/{{ $car->id }}/edit">Edit a Car</a>
+                          <form class="float-right" style="display: inline" action="/car/{{ $car->id }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
+                        </form>
                         </li>
                     @endforeach
                     </ul>

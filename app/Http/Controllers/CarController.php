@@ -131,6 +131,12 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $oldName = $car->name;
+        $car->delete();
+        return $this->index()->with(
+            [
+                'message_success' => "The Car " . $oldName . " was deleted."
+            ]
+        );
     }
 }
