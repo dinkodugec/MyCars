@@ -9,4 +9,15 @@ class Car extends Model
     protected $fillable = [
         'name', 'description', 'manufacturer', 'image'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 }

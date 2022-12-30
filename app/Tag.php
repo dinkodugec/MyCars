@@ -9,4 +9,9 @@ class Tag extends Model
     protected $fillable = [
         'name', 'slug'
     ];
+
+    public function cars()
+    {
+        return $this->belongsToMany('App\Car');
+    }
 }
