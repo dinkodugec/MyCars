@@ -14,7 +14,8 @@ class CarController extends Controller
      */
     public function index()
     {
-       $cars = Car::all();  //all is eloquent function
+       /* $cars = Car::all();  */ //all is eloquent function
+       $cars = Car::paginate(10);
 
        return view('car.index')->with([
         'cars' => $cars
