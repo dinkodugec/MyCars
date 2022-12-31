@@ -12,14 +12,21 @@
                         @foreach($cars as $car)
                         <li class="list-group-item">
                           <a title="Show details" href="/car/{{ $car->id }}">  {{ $car->name }}</a>
-                          @auth
-                            <a class="btn btn-sm btn-light ml-2"  href="/car/{{ $car->id }}/edit">Edit a Car</a>
-                              <form class="float-right" style="display: inline" action="/car/{{ $car->id }}" method="post">
-                                @csrf
-                               @method("DELETE")
-                                <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
-                             </form>
-                         @endauth
+
+                           @auth
+                              <a class="btn btn-sm btn-light ml-2"  href="/car/{{ $car->id }}/edit">Edit a Car</a>
+                            @endauth
+
+                            <span class="mx-2">Posted by: {{ $car->user->name }} ({{ $car->user->cars->count() }} Cars)</span>
+
+                            @auth
+                                <form class="float-right" style="display: inline" action="/car/{{ $car->id }}" method="post">
+                                    @csrf
+                                @method("DELETE")
+                                    <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
+                                </form>
+                           @endauth
+
                          <span class=" float-right mx-2">{{ $car->created_at->diffForHumans() }}</span>
                         </li>
                     @endforeach
