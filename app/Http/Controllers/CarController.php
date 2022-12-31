@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']); //if we are not logged in, we only executed index and show method, actually view
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -52,6 +60,7 @@ class CarController extends Controller
             'name' => $request['name'],
             'image' => $request['image'],
             'description' => $request['description'],
+            'user_id' => auth()->id()   // Retrieve the currently authenticated user's ID
         ]);
 
        /*  if($request['image']){
