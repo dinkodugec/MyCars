@@ -11,6 +11,10 @@
                         <b>{{$car->name}}</b>
                         <p>{{$car->manufacturer}}</p>
                         <p>{{$car->description}}</p>
+                        <br>
+                        @foreach($car->tags as $tag)
+                            <a href=""><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                        @endforeach
                     </div>
                 </div>
 
