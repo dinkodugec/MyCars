@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -29,3 +30,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('car', CarController::class);
 
 Route::resource('tag', TagController::class);
+
+Route::resource('user', UserController::class);
+
+Route::get('/car/tag/{tag_id}', 'CarTagController@getFilterdCars')->name('car_tag');

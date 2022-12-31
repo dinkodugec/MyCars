@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
             <div class="card">
+                @isset($filter)
+                <div class="card-header">Filtered Cars by <span>{{ $filter->name }}</span>
+                    <span class="float-right"><a href="/car">Show all Cars</a></span></div>
+                @else
                 <div class="card-header">All the Cars</div>
+                @endisset
 
                 <div class="card-body">
                     <ul class="list-group">
@@ -17,7 +22,7 @@
                               <a class="btn btn-sm btn-light ml-2"  href="/car/{{ $car->id }}/edit">Edit a Car</a>
                             @endauth
 
-                            <span class="mx-2">Posted by: {{ $car->user->name }} ({{ $car->user->cars->count() }} Cars)</span>
+                            <span class="mx-2">Posted by: <a href="user/{{ $car->user->id }}">{{ $car->user->name }}</a>  ({{ $car->user->cars->count() }} Cars)</span>
 
                             @auth
                                 <form class="float-right" style="display: inline" action="/car/{{ $car->id }}" method="post">
@@ -31,7 +36,7 @@
 
                          <br>
                                 @foreach($car->tags as $tag)
-                                    <a href=""><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                    <a href="/car/tag/{{ $tag->id }}}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                 @endforeach
                         </li>
                     @endforeach
