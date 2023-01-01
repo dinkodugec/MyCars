@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Car;
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CarController extends Controller
 {
@@ -83,8 +85,15 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
+
+        $allTags = Tag::all();
+         $usedTags = $car->tags;   //tagss - eloquent relation
+         $availableTags = $allTags->diff($usedTags);
+
        return view('car.show')->with([
-           'car' => $car
+           'car' => $car,
+           'availableTags' => $availableTags,
+            'message_success' => Session::get('message_success')  //flash session - deleted automatic
        ]);
     }
 
@@ -96,6 +105,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
+
+
         return view('car.edit')->with([
             'car'=> $car
         ]);

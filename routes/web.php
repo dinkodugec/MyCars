@@ -34,3 +34,7 @@ Route::resource('tag', TagController::class);
 Route::resource('user', UserController::class);
 
 Route::get('/car/tag/{tag_id}', 'CarTagController@getFilterdCars')->name('car_tag');
+
+// Attach / Detach Tags to Car
+Route::get('/car/{car_id}/tag/{tag_id}/attach', 'CarTagController@attachTag');
+Route::get('/car/{car_id}/tag/{tag_id}/detach', 'CarTagController@detachTag');
