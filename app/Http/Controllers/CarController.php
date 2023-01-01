@@ -70,11 +70,17 @@ class CarController extends Controller
             $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
          } */
         $car->save();
-        return $this->index()->with(
+     /*    return $this->index()->with(
                [
                 'message_success' => "The Car" . " " . $car->name . " " . "was created."
                ]
-      );
+      ); */
+
+      return redirect('/car/' . $car->id)->with(
+        [
+            'message_warning' => "Please assign some tags now."
+        ]
+    );
     }
 
     /**
@@ -93,7 +99,9 @@ class CarController extends Controller
        return view('car.show')->with([
            'car' => $car,
            'availableTags' => $availableTags,
-            'message_success' => Session::get('message_success')  //flash session - deleted automatic
+            'message_success' => Session::get('message_success'),  //flash session - deleted automatic
+            'message_warning' => Session::get('message_warning')
+
        ]);
     }
 

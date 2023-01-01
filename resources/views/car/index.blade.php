@@ -30,13 +30,15 @@
                                 @method("DELETE")
                                     <input class="btn btn-sm btn-outline-danger" type="submit" value="Delete">
                                 </form>
+
                            @endauth
+
 
                          <span class=" float-right mx-2">{{ $car->created_at->diffForHumans() }}</span>
 
                          <br>
                                 @foreach($car->tags as $tag)
-                                    <a href="/car/tag/{{ $tag->id }}}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                    <a href="/car/tag/{{ $tag->id }}"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                 @endforeach
                         </li>
                     @endforeach
