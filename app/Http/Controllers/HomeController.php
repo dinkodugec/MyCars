@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Car;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $cars = Car::select()
+        ->where('user_id', auth()->id()) //where user id is my ID/auth
+        ->orderBy('updated_at', "DESC")
+        ->get();
+
+        return view('home')->with([
+            'cars'=> $cars      //passing cars variable
+        ]);
     }
 }
