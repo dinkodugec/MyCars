@@ -16,7 +16,7 @@
                                     <b>Used Tags:</b> (Click to remove)
                                     <p>
                                         @foreach($car->tags as $tag)
-                                            <a href="/hobby/{{$car->id}}/tag/{{$tag->id}}/detach"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                            <a href="/car/{{$car->id}}/tag/{{$tag->id}}/detach"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                         @endforeach
                                     </p>
                                 @endif
@@ -25,7 +25,7 @@
                                     <b>Available Tags:</b> (Click to assign)
                                     <p>
                                         @foreach($availableTags as $tag)
-                                            <a href="/hobby/{{$car->id}}/tag/{{$tag->id}}/attach"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
+                                            <a href="/car/{{$car->id}}/tag/{{$tag->id}}/attach"><span class="badge badge-{{ $tag->style }}">{{ $tag->name }}</span></a>
                                         @endforeach
                                     </p>
                                 @endif

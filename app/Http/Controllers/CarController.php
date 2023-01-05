@@ -6,6 +6,8 @@ use App\Car;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
+
 
 class CarController extends Controller
 {
@@ -133,6 +135,7 @@ class CarController extends Controller
             'name' => 'required|min:2',
             'description' => 'required|min:5',
             'manufacturer' => 'required|min:2',
+            'image'=> 'mimes:jpeg,jpg,bmp,png,gif'
         ]);
 
         $car->update([
@@ -142,9 +145,9 @@ class CarController extends Controller
             'description' => $request['description'],
         ]);
 
-       /*  if($request['image']){
-            $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
-         } */
+         if($request->image){
+             $image = Image::make();
+         }
         $car->save();
         return $this->index()->with(
                [

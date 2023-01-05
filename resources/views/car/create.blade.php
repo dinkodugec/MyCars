@@ -41,7 +41,7 @@
                 <div class="card">
                     <div class="card-header">Create New Car</div>
                     <div class="card-body">
-                        <form action="/car" method="post">
+                        <form autocomplete="off" action="/car" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -63,8 +63,10 @@
                             <div class="form-group">
                                 <label for="file">Image</label>
                                     <input type="file"
+                                           id="image"
                                            name="image"
-                                           class="form-control-file">
+                                           class="form-control-file{{ $errors->has('image') ? ' border-danger' : '' }}">
+                                           <small class="form-text text-danger">{!! $errors->first('image') !!}</small>
                               </div>
                             <input class="btn btn-primary mt-4" type="submit" value="Save Car">
                         </form>

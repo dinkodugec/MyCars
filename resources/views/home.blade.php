@@ -55,7 +55,7 @@
                     </ul>
                     @endisset
 
-                    <a class="btn btn-success btn-sm" href="/hobby/create"><i class="fas fa-plus-circle"></i> Create new Hobby</a>
+                    <a class="btn btn-success btn-sm" href="/car/create"><i class="fas fa-plus-circle"></i> Create new CAR</a>
                 </div>
             </div>
         </div>

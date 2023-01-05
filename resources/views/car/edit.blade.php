@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-header">Edit Car</div>
                     <div class="card-body">
-                        <form action="/car/{{ $car->id }}" method="post">
+                        <form autocomplete="off" action="/car/{{ $car->id }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT') {{-- made a hidden input to know that is method PUT --}}
 
@@ -33,8 +33,10 @@
                             <div class="form-group">
                                 <label for="file">Image</label>
                                     <input type="file"
+                                           id="image"
                                            name="image"
-                                           class="form-control-file">
+                                           class="form-control-file{{ $errors->has('image') ? ' border-danger' : '' }}">
+                                           <small class="form-text text-danger">{!! $errors->first('image') !!}</small>
                               </div>
                             <input class="btn btn-primary mt-4" type="submit" value="Save Car">
                         </form>
