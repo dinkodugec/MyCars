@@ -13,6 +13,8 @@ class CarController extends Controller
 {
 
 
+
+
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']); //if we are not logged in, we only executed index and show method, actually view
