@@ -38,3 +38,6 @@ Route::get('/car/tag/{tag_id}', 'CarTagController@getFilterdCars')->name('car_ta
 // Attach / Detach Tags to Car
 Route::get('/car/{car_id}/tag/{tag_id}/attach', 'CarTagController@attachTag');
 Route::get('/car/{car_id}/tag/{tag_id}/detach', 'CarTagController@detachTag');
+
+//DELETE
+Route::get('/delete-car/car/{car_id}', 'CarController@deleteImages');

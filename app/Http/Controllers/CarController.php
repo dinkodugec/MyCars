@@ -58,7 +58,10 @@ class CarController extends Controller
             'name' => 'required|min:2',
             'description' => 'required|min:5',
             'manufacturer' => 'required|min:2',
+            'image'=> 'mimes:jpeg,jpg,bmp,png,gif'
         ]);
+
+
 
         $car = new Car([
             'manufacturer' => $request['manufacturer'],
@@ -68,15 +71,13 @@ class CarController extends Controller
             'user_id' => auth()->id()   // Retrieve the currently authenticated user's ID
         ]);
 
-       /*  if($request['image']){
-            $request['image'] = $request['image']->store('images');  //store method maka a folder and store image in random way
-         } */
+        if($request->image){
+            $this->saveImages($request->image, $car->id);
+        }
+
+
         $car->save();
-     /*    return $this->index()->with(
-               [
-                'message_success' => "The Car" . " " . $car->name . " " . "was created."
-               ]
-      ); */
+
 
       return redirect('/car/' . $car->id)->with(
         [
@@ -146,7 +147,26 @@ class CarController extends Controller
         ]);
 
          if($request->image){
-             $image = Image::make();
+            $this->saveImages($request->image, $car->id);
+            /*  $image = Image::make($request->image);  //new instance of Intervention\Image\Facades\Image
+             if ( $image->width() > $image->height() ) { // Landscape
+                $image->widen(1200)
+                ->save(public_path() . "/img/cars/" . $car->id . "_large.jpg")
+                ->widen(400)->pixelate(12)
+                ->save(public_path() . "/img/cars/" . $car->id . "_pixelated.jpg");
+            $image = Image::make($request->image);
+            $image->widen(60)
+                ->save(public_path() . "/img/cars/" . $car->id . "_thumb.jpg");
+             }else{
+                // Portrait
+                $image->heighten(900)
+                    ->save(public_path() . "/img/cars/" . $car->id . "_large.jpg")
+                    ->heighten(400)->pixelate(12)
+                    ->save(public_path() . "/img/cars/" . $car->id . "_pixelated.jpg");
+                $image = Image::make($request->image);
+                $image->heighten(60)
+                    ->save(public_path() . "/img/cars/" . $car->id . "_thumb.jpg");
+             } */
          }
         $car->save();
         return $this->index()->with(
@@ -172,4 +192,47 @@ class CarController extends Controller
             ]
         );
     }
+
+    public function saveImages($imageInput, $carId)
+
+    {
+        $image = Image::make($imageInput);  //new instance of Intervention\Image\Facades\Image
+        if ( $image->width() > $image->height() ) { // Landscape
+           $image->widen(1200)
+           ->save(public_path() . "/img/cars/" . $carId . "_large.jpg")
+           ->widen(400)->pixelate(12)
+           ->save(public_path() . "/img/cars/" . $carId . "_pixelated.jpg");
+       $image = Image::make($imageInput);
+       $image->widen(60)
+           ->save(public_path() . "/img/cars/" . $carId . "_thumb.jpg");
+        }else{
+           // Portrait
+           $image->heighten(900)
+               ->save(public_path() . "/img/cars/" . $carId . "_large.jpg")
+               ->heighten(400)->pixelate(12)
+               ->save(public_path() . "/img/cars/" . $carId . "_pixelated.jpg");
+           $image = Image::make($imageInput);
+           $image->heighten(60)
+               ->save(public_path() . "/img/cars/" .$carId . "_thumb.jpg");
+        }
+    }
+
+
+
+    public function deleteImages($car_id){
+        if(file_exists(public_path() . "/img/cars/" . $car_id . "_large.jpg"))
+            unlink(public_path() . "/img/cars/" . $car_id . "_large.jpg");
+        if(file_exists(public_path() . "/img/cars/" . $car_id . "_thumb.jpg"))
+            unlink(public_path() . "/img/cars/" . $car_id . "_thumb.jpg");
+        if(file_exists(public_path() . "/img/cars/" . $car_id . "_pixelated.jpg"))
+            unlink(public_path() . "/img/cars/" . $car_id . "_pixelated.jpg");
+
+        return back()->with(
+            [
+                'message_success' => "The Image was deleted."
+            ]
+        );
+    }
+
+
 }

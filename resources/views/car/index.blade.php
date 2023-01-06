@@ -7,7 +7,7 @@
                 <div class="card">
 
                     @isset($filter)
-                        <div class="card-header">Filtered hobbies by
+                        <div class="card-header">Filtered CARS by
                             <span style="font-size: 130%;" class="badge badge-{{ $filter->style }}">{{ $filter->name }}</span>
                             <span class="float-right"><a href="/car">Show all CARS</a></span>
                         </div>
@@ -19,9 +19,13 @@
                         <ul class="list-group">
                             @foreach($cars as $car)
                                 <li class="list-group-item">
+                                    @if (file_exists('img/cars/' . $car->id . '_thumb.jpg'))
                                     <a title="Show Details" href="/car/{{ $car->id }}">
-                                        <img src="/img/thumb_landscape.jpg" alt="thumb">
+                                        <img src="/img/cars/{{ $car->id }}_thumb.jpg" alt="CAr Thumb">
                                         {{ $car->name }}
+                                    </a>
+                                    @endif
+                                
                                     </a>
                                     @auth
                                     <a class="btn btn-sm btn-light ml-2" href="/car/{{ $car->id }}/edit"><i class="fas fa-edit"></i> Edit CAr</a>

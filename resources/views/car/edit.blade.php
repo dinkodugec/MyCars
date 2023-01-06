@@ -30,6 +30,13 @@
                                 <small class="form-text text-danger">{!! $errors->first('description') !!}</small>
                             </div>
 
+                            @if (file_exists('img/cars/' . $car->id . '_large.jpg'))
+                            <div class="mb-2">
+                                <img style="max-width: 400px; max-height: 300px;" src="/img/cars/{{ $car->id }}_large.jpg" alt="">
+                                <a class="btn btn-outline-danger float-right" href="/delete-car/car/{{ $car->id }}">DELETE IMAGES</a>
+                             </a>
+                            </div>
+                            @endif
                             <div class="form-group">
                                 <label for="file">Image</label>
                                     <input type="file"
