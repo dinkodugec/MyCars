@@ -7,6 +7,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Gate;
 
 
 class CarController extends Controller
@@ -118,7 +119,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-
+        abort_unless(Gate::allows('update', $car), 403);
 
         return view('car.edit')->with([
             'car'=> $car
@@ -134,6 +135,9 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)  //Request from the form and instance of car that we WANT DISPLAY
     {
+
+        abort_unless(Gate::allows('update', $car), 403);
+
         $request->validate([
             'name' => 'required|min:2',
             'description' => 'required|min:5',
@@ -186,6 +190,8 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
+        abort_unless(Gate::allows('delete', $car), 403);
+
         $oldName = $car->name;
         $car->delete();
         return $this->index()->with(
