@@ -11,6 +11,7 @@ class TagController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index']); //if we are not logged in, we only executed index and show method, actually view
+        $this->middleware('admin')->except(['index']);
     }
 
     /**
