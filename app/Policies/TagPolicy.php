@@ -10,6 +10,14 @@ class TagPolicy
 {
     use HandlesAuthorization;
 
+
+    //this is excepction, admin user can do everything
+    public function before($user, $ability) {
+        if ($user->role === 'admin') {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -30,7 +38,7 @@ class TagPolicy
      */
     public function view(User $user, Tag $tag)
     {
-        //
+        return false;
     }
 
     /**
@@ -41,7 +49,7 @@ class TagPolicy
      */
     public function create(User $user)
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +61,7 @@ class TagPolicy
      */
     public function update(User $user, Tag $tag)
     {
-        //
+        return false;
     }
 
     /**
@@ -65,7 +73,7 @@ class TagPolicy
      */
     public function delete(User $user, Tag $tag)
     {
-        //
+        return false;
     }
 
     /**
@@ -77,7 +85,7 @@ class TagPolicy
      */
     public function restore(User $user, Tag $tag)
     {
-        //
+        return false;
     }
 
     /**
